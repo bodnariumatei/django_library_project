@@ -1,5 +1,6 @@
 # Django Library Project
 Project developed to teach myself the Django Pyhton framework.
+Bootstrap used to make everything look a bit better.
 
 ## Features:
   - login
