@@ -1,0 +1,30 @@
+{% extends 'administration/base_admin.html' %}
+
+{% block title %} Admin Reports {% endblock %}
+
+{% block content %}
+    <h3 style="decoration:underline">Reports</h3>
+    <br>
+    <div class="row">
+        <div class="col" style="border-right: 1px solid darkgrey;">
+            <h3>Available books</h3>
+            {% for book in books %}
+                <hr>
+                <div class="row">
+                    <p><strong>{{book.title}}</strong> by {{book.author}}</p>
+                    <p>Available copies: {{book.no_available}}</p>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col" style="border-left: 1px solid darkgrey;">
+            <h3>Borrowed books</h3>
+            {% for br in brs %}
+                <hr>
+                <div class="row">
+                        <p><em>{{br.user.username}}</em> - {{br.book.title}} by {{br.book.author}}</p>
+                        <p>Due date: <strong>{{br.due_date}}</strong></p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

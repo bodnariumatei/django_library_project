@@ -1,0 +1,52 @@
+{% extends "administration/base_admin.html" %}
+
+{% block title %} Books Administration {% endblock %}
+
+{% block styles %}
+  .search-bar{
+    width: 75%;
+    height: 38px;
+  }
+  a{
+    text-decoration: none;
+    color: white;
+  }
+  a:hover{
+    text-decoration: underline;
+  }
+  .row-bordered{
+    border-top: 1px solid #F5F5F5;
+    border-bottom: 1px solid #F5F5F5;
+    padding: 5px;
+  }
+  .container{
+    margin-top: 10px;
+  }
+{% endblock %}
+
+{% block page_title %} Books Administration {% endblock %}
+
+{% block content %}
+  <form action="{% url 'books' %}" method="get">
+    <input name="q" type="text" placeholder="Search..." class="search-bar">
+    <button type="submit" class="btn btn-secondary"> Search </button>
+  </form>
+
+  <br>
+  <a class="btn btn-primary" href="/admin/create_book" role="button">Add New Book</a>
+  <br>
+
+  <div class="container">
+    {% for b in books %}
+      <div class="row row-bordered">
+        <div class="col-8">
+          <p><a href="/admin/books/{{b.id}}"><strong>{{b.title}}</strong> by <em>{{b.author}}</em></a></p>
+          Available/Total copies: {{b.no_available}}/{{b.no_copies}}
+        </div>
+        <div class="col-4">
+          <a class="btn btn-light" href="/admin/books/{{b.id}}" role="button">Update Book</a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

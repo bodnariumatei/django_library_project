@@ -1,0 +1,36 @@
+{% extends 'library/base_library.html' %}
+
+{% block title%} Home Page {% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <h3 style="margin: 20px 0 50px 0;"> Books in Library </h3>
+
+        {% for b in books %}
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div style="height:100px; width:80px; background-color: #c1c1c1; margin-left:15px;"></div>
+                    </div>
+                    <div class="col-8">
+                        <h4>{{b.title}}</h4>
+                        <p>by <em>{{b.author}}</em></p>
+                        <p><strong>Available: {{b.no_available}}</strong></p>
+                    </div>
+                    <div class="col" style="padding: 10px">
+                        <a class="btn btn-secondary" href="/library/{{b.id}}" role="button"> Details </a>
+                        <form method="post" action="">
+                            {% csrf_token %}
+                            <br>
+                            <button type="submit" name="borrow" value="{{b.id}}" class="btn btn-primary">Borrow</button>
+                        </form>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>You are not logged in! </p>
+        <p> Login <a href="/accounts/login"> here</a></p>
+    {% endif %}
+{% endblock %}

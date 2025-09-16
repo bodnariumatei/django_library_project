@@ -1,0 +1,31 @@
+{% extends "administration/base_admin.html" %}
+{% block title %} Book Admin {% endblock %}
+
+{% block styles %}
+    .right-text {
+        text-align: right;
+    }
+    input, textarea{
+        width: 100%;
+    }
+{% endblock %}
+
+{% block page_title %} Add new book {% endblock %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="row mb-3">
+                <div class="col-2 right-text">{{ field.label_tag }}</div>
+                <div class="col-8">{{ field }}</div>
+                {% if field.errors %}
+                    <div class="text-danger">
+                        {{ field.errors }}
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+      <button type="submit" class="btn btn-success"> Add Book</button>
+    </form>
+{% endblock %}

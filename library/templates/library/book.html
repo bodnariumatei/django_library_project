@@ -1,0 +1,43 @@
+{% extends "library/base_library.html" %}
+
+{% block title%} {{book.title}} {% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div style="height:100px; width:80px; background-color: #c1c1c1; margin-left:15px;"></div>
+                    </div>
+                    <div class="col-10">
+                        <h3>{{book.title}}</h3>
+                        <h4>by <em>{{book.author}}</em></h4>
+                        <p>{{book.publisher}}, {{book.year_of_release}}</p>
+                    </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col">
+                      <p>{{book.description}}</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                      <div class="col">
+                          <p>Number of copies in stock: {{book.no_copies}}</p>
+                          <p><strong>Available copies: {{book.no_available}}</strong></p>
+                      </div>
+                      <div class="col">
+                        <form method="post" action="">
+                            {% csrf_token %}
+                            <button type="submit" name="borrow" value="{{book.id}}" class="btn btn-primary">Borrow</button>
+                        </form>
+                      </div>
+                  </div>
+                </div>
+            </div>
+
+    {% else %}
+        <p>You are not logged in! </p>
+        <p> Login <a href="/accounts/login"> here</a></p>
+    {% endif %}
+{% endblock %}

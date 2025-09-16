@@ -1,0 +1,37 @@
+{% extends "library/base_library.html" %}
+
+{% block title%} Borrowed Books {% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+      <h3 style="margin: 20px 0 50px 0;"> Currently Borrowed Books </h3>
+
+        {% for br in brs %}
+            {% if br.returned == False %}
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div style="height:100px; width:80px; background-color: #c1c1c1; margin-left:15px;"></div>
+                        </div>
+                        <div class="col-8">
+                            <h4>{{br.book.title}}</h4>
+                            <p>by <em>{{br.book.author}}</em></p>
+                        </div>
+                        <div class="col" style="padding: 10px">
+                            <p>Due date: <br><strong>{{br.due_date}}</strong></p>
+                            <form method="post" action="">
+                                {% csrf_token %}
+                                <button type="submit" name="return" value="{{br.id}}" class="btn btn-success">Return</button>
+                            </form>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+    {% else %}
+        <p>You are not logged in! </p>
+        <p> Login <a href="/accounts/login"> here</a></p>
+    {% endif %}
+{% endblock %}

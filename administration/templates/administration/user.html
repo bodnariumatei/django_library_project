@@ -1,0 +1,74 @@
+{% extends "administration/base_admin.html" %}
+
+{% block title %} User Administration {% endblock %}
+
+{% block styles %}
+    .right-text {
+        text-align: right;
+    }
+    .form-btn{
+        margin: 10px 10px;
+    }
+{% endblock %}
+
+{% block content %}
+    <h4>User's <em>{{user.username}}</em> administration page</h4>
+    <div class="container">
+        <div class="row">
+            <div class="col-2 right-text">
+                Username:
+            </div>
+            <div class="col-8">
+                <strong>{{user.username}}</strong>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2 right-text">
+                First name:
+            </div>
+            <div class="col-8">
+                <em>{{user.first_name}}</em>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2 right-text">
+                Last name:
+            </div>
+            <div class="col-8">
+                <em>{{user.last_name}}</em>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2 right-text">
+                Role:
+            </div>
+            <div class="col-8">
+                {% if user.is_staff %}
+                    admin
+                {% elif user.is_approved %}
+                    approved user
+                {% else %}
+                    unapproved user
+                {% endif %}
+            </div>
+        </div>
+
+        <form method="post" action="">
+            {% csrf_token %}
+            {% if user.is_staff == False %}
+                {% if user.is_approved == False %}
+                    <button type="submit" name="approve" value="{{user.id}}" class="btn btn-success form-btn">Approve</button>
+                {% else %}
+                    <button type="submit" name="disapprove" value="{{user.id}}" class="btn btn-warning form-btn">Disapprove</button>
+                {% endif %}
+
+                <button type="submit" name="remove" value="{{user.id}}" class="btn btn-danger form-btn">Remove</button>
+                <button type="submit" name="makeadmin" value="{{}user.id}" class="btn btn-primary form-btn">Make admin</button>
+            {% else %}
+                <button type="submit" name="noadmin" value="{{user.id}}" class="btn btn-secondary form-btn">Remove Admin</button>
+            {% endif %}
+
+        </form>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends "administration/base_admin.html" %}
+
+{% block title %} Users Administration {% endblock %}
+
+{% block styles %}
+    a{
+        text-decoration: none;
+        color: white;
+    }
+    a:hover{
+        text-decoration: underline;
+    }
+    button{
+        margin: 0 5px;
+    }
+    .user-row{
+        background-color: #53536d;
+        margin: 5px 0;
+        padding: 5px;
+    }
+{% endblock %}
+
+{% block page_title %} Users Administration {% endblock %}
+
+{% block content %}
+    <h3>Pending Users</h3>
+    <div class="container">
+        {% if pending_users %}
+            {% for u in pending_users %}
+                <div class="row user-row">
+                    <div class="col">
+                        <p><a href="/admin/users/{{u.id}}">{{u.username}}</a></p>
+                    </div>
+                    <div class="col-3">
+                        <form method="post" action="" style="display:flex; justify-content:right;">
+                            {% csrf_token %}
+                            <button type="submit" name="approve" value="{{u.id}}" class="btn btn-success">Approve</button>
+                            <!--<button type="submit" name="decline" value="{{u.id}}" class="btn btn-danger">Decline</button>-->
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>There are no pending users!</p>
+        {% endif %}
+    </div>
+<br>
+    <h3>Approved Users</h3>
+    <div class="container">
+        {% for u in approved_users %}
+            <div class="row user-row">
+                <p><a href="/admin/users/{{u.id}}">{{u.username}}</a></p>
+            </div>
+        {% endfor %}
+    </div>
+<br>
+    <h3>Admins</h3>
+        <div class="container">
+            {% for u in admins %}
+                <div class="row user-row">
+                    <p><a href="/admin/users/{{u.id}}">{{u.username}}</a></p>
+                </div>
+            {% endfor %}
+        </div>
+    {% endblock %}
