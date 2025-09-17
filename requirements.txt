@@ -1,0 +1,13 @@
+What I used:
+	- python 3.13
+	- django 5.2.6
+
+Requirements:
+	- django-crispy-forms 2.4 -> pip install django-crispy-forms
+	- crispy-bootstrap5 -> pip install crispy-bootstrap5
+
+Instructions:
+	1. clone git
+	2. open cmd in django_library_project file
+	3. run "python manage.py runserver"
+	4. in browser go to http://127.0.0.1:8000/
