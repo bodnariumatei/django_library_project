@@ -3,33 +3,26 @@
 {% block title%} Borrowed Books {% endblock %}
 
 {% block content %}
-    {% if user.is_authenticated %}
-      <h3 style="margin: 20px 0 50px 0;"> Borrow History </h3>
+    <h3 style="margin: 20px 0 50px 0;"> Borrow History </h3>
 
-        {% for br in brs %}
-            {% if br.returned == True %}
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <div style="height:100px; width:80px; background-color: #c1c1c1; margin-left:15px;"></div>
-                        </div>
-                        <div class="col-8">
-                            <h4>{{br.book.title}}</h4>
-                            <p>by <em>{{br.book.author}}</em></p>
-                            <p>Date of borrowing: {{br.date_of_borrowing}}</p>
-                            <p>Date of return: {{br.date_of_return}}</p>
-                        </div>
-                        <div class="col" style="padding: 10px">
-
-                        </div>
+    {% for br in brs %}
+        {% if br.returned == True %}
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div style="height:100px; width:80px; background-color: #c1c1c1; margin-left:15px;"></div>
                     </div>
-                    <hr>
+                    <div class="col-8">
+                        <h4>{{br.book.title}}</h4>
+                        <p>by <em>{{br.book.author}}</em></p>
+                        <p>Date of borrowing: {{br.date_of_borrowing}}</p>
+                        <p>Date of return: {{br.date_of_return}}</p>
+                    </div>
+                    <div class="col" style="padding: 10px">
+                    </div>
                 </div>
-            {% endif %}
-        {% endfor %}
-
-    {% else %}
-        <p>You are not logged in! </p>
-        <p> Login <a href="/accounts/login"> here</a></p>
-    {% endif %}
+                <hr>
+            </div>
+        {% endif %}
+    {% endfor %}
 {% endblock %}

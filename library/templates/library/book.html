@@ -3,7 +3,6 @@
 {% block title%} {{book.title}} {% endblock %}
 
 {% block content %}
-    {% if user.is_authenticated %}
         <div class="container">
                 <div class="row">
                     <div class="col">
@@ -35,9 +34,4 @@
                   </div>
                 </div>
             </div>
-
-    {% else %}
-        <p>You are not logged in! </p>
-        <p> Login <a href="/accounts/login"> here</a></p>
-    {% endif %}
 {% endblock %}

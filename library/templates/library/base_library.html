@@ -55,10 +55,13 @@
       <div class="col-8">
         <h1 class="mt-2">Project: Library</h1>
         <hr class="mt-0 mb-4">
-
+          {% if user.is_authenticated %}
             {% block content %}
             {% endblock %}
-
+          {% else %}
+            <p>You are not logged in! </p>
+            <p> Login <a href="/accounts/login"> here</a></p>
+          {% endif %}
       </div>
     </div>
   </div>
