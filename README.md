@@ -15,6 +15,7 @@ Bootstrap used to make everything look a bit better.
   - reports admin page, with reports for all books in library and their availability and reports for the currently borrowed books
   - an admin can:
       * add/modify/remove books
+      * search for book by title or author
       * approve user accounts
       * make users admins
       * remove users
@@ -23,7 +24,3 @@ Bootstrap used to make everything look a bit better.
   - library - where all the library related logic takes place: listing books, borrowing, returning
   - accounts - deals with the login and register features
   - administration - custom admin pages
-
-## Extra packages nedeed:
-  - crispy: $ pip install crispy-bootstrap5
-     * useful info: https://medium.com/@azzouzhamza13/django-crispy-forms-bootstrap5-00a1eb3ec3c7
