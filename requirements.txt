@@ -11,3 +11,4 @@ Instructions:
 	2. open cmd in django_library_project file
 	3. run "python manage.py runserver"
 	4. in browser go to http://127.0.0.1:8000/
+	* to login as admin either make a new superuser or use "admin" - password: "admin" in login
