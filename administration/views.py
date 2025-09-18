@@ -1,16 +1,26 @@
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from accounts.models import CustomUser
 from administration.forms import BookForm
 from library.models import BorrowRecord, Book
 from django.db.models import Q
-
+from datetime import datetime as dt
 
 # Create your views here.
 
 @login_required
 @user_passes_test(lambda u: u.is_staff)  # only staff can access
 def admin_reports(request):
+    if request.method == "POST" and request.POST.get("return"):
+        br_id = request.POST.get("return")
+        br = get_object_or_404(BorrowRecord, id=br_id)
+        if not br.returned:
+            br.returned = True
+            br.date_of_return = dt.now()
+            br.book.no_available += 1
+            br.book.save()
+            br.save()
+
     borrow_records = BorrowRecord.objects.filter(returned=False)
     books = Book.objects.filter(no_available__gt=0)
     return render(request, "administration/reports.html", {"brs":borrow_records, "books":books})

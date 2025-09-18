@@ -17,10 +17,6 @@
                     </div>
                     <div class="col" style="padding: 10px">
                         <p>Due date: <br><strong>{{br.due_date}}</strong></p>
-                        <form method="post" action="">
-                            {% csrf_token %}
-                            <button type="submit" name="return" value="{{br.id}}" class="btn btn-success">Return</button>
-                        </form>
                     </div>
                 </div>
                 <hr>

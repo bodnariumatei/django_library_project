@@ -6,7 +6,7 @@
     <h3 style="decoration:underline">Reports</h3>
     <br>
     <div class="row">
-        <div class="col" style="border-right: 1px solid darkgrey;">
+        <div class="col-5" style="border-right: 1px solid darkgrey;">
             <h3>Available books</h3>
             {% for book in books %}
                 <hr>
@@ -16,13 +16,21 @@
                 </div>
             {% endfor %}
         </div>
-        <div class="col" style="border-left: 1px solid darkgrey;">
+        <div class="col-7" style="border-left: 1px solid darkgrey;">
             <h3>Borrowed books</h3>
             {% for br in brs %}
                 <hr>
                 <div class="row">
+                    <div class="col-8">
                         <p><em>{{br.user.username}}</em> - {{br.book.title}} by {{br.book.author}}</p>
                         <p>Due date: <strong>{{br.due_date}}</strong></p>
+                    </div>
+                    <div class="col-4">
+                        <form method="post" action="">
+                            {% csrf_token %}
+                            <button type="submit" name="return" value="{{br.id}}" class="btn btn-primary">Return</button>
+                        </form>
+                    </div>
                 </div>
             {% endfor %}
         </div>
